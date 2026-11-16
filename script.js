@@ -22,8 +22,6 @@ async function getCryptoData() {
 
         const coins = await response.json();
 
-        console.log("Crypto data:", coins);
-
         renderCoins(coins);
 
         showWatchlist(coins);
@@ -786,6 +784,7 @@ async function showCoinDetails(coinId) {
 
     }
 
+
     catch (error) {
 
         console.error(
@@ -879,6 +878,7 @@ function toggleDetailsWatchlist(coinId) {
         }
 
     }
+
 
     else {
 
@@ -978,3 +978,57 @@ coinDetailsModal.addEventListener(
 ========================= */
 
 getCryptoData();
+
+
+/* =========================
+   Refresh Data
+========================= */
+
+const refreshDataBtn =
+    document.getElementById(
+        "refreshDataBtn"
+    );
+
+
+refreshDataBtn.addEventListener(
+    "click",
+    async function () {
+
+        this.disabled = true;
+        this.textContent = "↻ Refreshing...";
+
+        try {
+
+            await getCryptoData();
+
+            this.textContent = "✓ Data Updated";
+
+            setTimeout(() => {
+
+                this.textContent = "↻ Refresh Data";
+                this.disabled = false;
+
+            }, 1500);
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Refresh error:",
+                error
+            );
+
+            this.textContent = "✕ Refresh Failed";
+            this.disabled = false;
+
+            setTimeout(() => {
+
+                this.textContent = "↻ Refresh Data";
+
+            }, 1500);
+
+        }
+
+    }
+);
