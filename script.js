@@ -16,10 +16,13 @@ async function getCryptoData() {
 
         const response = await fetch(API_URL);
 
+        if (!response.ok) {
+            throw new Error("API request failed");
+        }
+
         const coins = await response.json();
 
         console.log("Crypto data:", coins);
-
 
         renderCoins(coins);
 
@@ -48,18 +51,15 @@ function renderCoins(coins) {
     const coinContainer =
         document.getElementById("coinContainer");
 
-
     coinContainer.innerHTML = coins.map(coin => {
 
         const change =
             coin.price_change_percentage_24h;
 
-
         const changeColor =
             change >= 0
                 ? "green"
                 : "red";
-
 
         return `
 
@@ -70,17 +70,14 @@ function renderCoins(coins) {
                     alt="${coin.name}"
                 >
 
-
                 <h3>
                     ${coin.name}
                 </h3>
 
-
                 <p>
                     Price:
-                    $${coin.current_price}
+                    $${coin.current_price.toLocaleString()}
                 </p>
-
 
                 <p
                     style="
@@ -88,28 +85,33 @@ function renderCoins(coins) {
                         font-weight: bold;
                     "
                 >
-
                     24h Change:
                     ${change?.toFixed(2)}%
-
                 </p>
-
 
                 <p>
-
                     Market Cap:
                     $${coin.market_cap.toLocaleString()}
-
                 </p>
 
+
+                <!-- Watchlist Button -->
 
                 <button
                     class="watchlist-btn"
                     data-id="${coin.id}"
                 >
-
                     ☆ Add to Watchlist
+                </button>
 
+
+                <!-- View Details Button -->
+
+                <button
+                    class="details-btn"
+                    onclick="showCoinDetails('${coin.id}')"
+                >
+                    View Details
                 </button>
 
             </div>
@@ -174,13 +176,13 @@ function setupWatchlistButtons(coins) {
                     ) || [];
 
 
+                /* Remove */
+
                 if (
                     currentWatchlist.includes(
                         coinId
                     )
                 ) {
-
-                    /* Remove */
 
                     currentWatchlist =
                         currentWatchlist.filter(
@@ -188,26 +190,27 @@ function setupWatchlistButtons(coins) {
                                 id !== coinId
                         );
 
-
                     this.textContent =
                         "☆ Add to Watchlist";
 
                 }
 
-                else {
 
-                    /* Add */
+                /* Add */
+
+                else {
 
                     currentWatchlist.push(
                         coinId
                     );
-
 
                     this.textContent =
                         "★ Added to Watchlist";
 
                 }
 
+
+                /* Save */
 
                 localStorage.setItem(
                     "watchlist",
@@ -216,6 +219,8 @@ function setupWatchlistButtons(coins) {
                     )
                 );
 
+
+                /* Update Watchlist */
 
                 showWatchlist(coins);
 
@@ -295,16 +300,14 @@ function showWatchlist(coins) {
                     alt="${coin.name}"
                 >
 
-
                 <div>
 
                     <strong>
                         ${coin.name}
                     </strong>
 
-
                     <p>
-                        $${coin.current_price}
+                        $${coin.current_price.toLocaleString()}
                     </p>
 
                 </div>
@@ -415,16 +418,22 @@ menuLinks.forEach(link => {
 
             /* Show selected section */
 
-            document
-                .getElementById(
+            const selectedSection =
+                document.getElementById(
                     sectionId
-                )
-                .classList.add(
-                    "active-section"
                 );
 
 
-            /* Active menu */
+            if (selectedSection) {
+
+                selectedSection.classList.add(
+                    "active-section"
+                );
+
+            }
+
+
+            /* Active Menu */
 
             menuLinks.forEach(item => {
 
@@ -526,11 +535,442 @@ if (
    Default Menu
 ========================= */
 
-document
-    .querySelector(
+const overviewMenu =
+    document.querySelector(
         '[data-section="overview"]'
-    )
-    .classList.add("active");
+    );
+
+
+if (overviewMenu) {
+
+    overviewMenu.classList.add(
+        "active"
+    );
+
+}
+
+
+/* =========================
+   COIN DETAILS
+========================= */
+
+async function showCoinDetails(coinId) {
+
+    const modal =
+        document.getElementById(
+            "coinDetailsModal"
+        );
+
+
+    const content =
+        document.getElementById(
+            "coinDetailsContent"
+        );
+
+
+    /* Open Modal */
+
+    modal.classList.remove(
+        "hidden"
+    );
+
+
+    /* Loading */
+
+    content.innerHTML = `
+
+        <div class="details-loading">
+
+            <p>
+                Loading coin details...
+            </p>
+
+        </div>
+
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to fetch coin details"
+            );
+
+        }
+
+
+        const coin =
+            await response.json();
+
+
+        const marketData =
+            coin.market_data;
+
+
+        const price =
+            marketData.current_price.usd;
+
+
+        const change =
+            marketData
+                .price_change_percentage_24h;
+
+
+        const changeColor =
+            change >= 0
+                ? "green"
+                : "red";
+
+
+        content.innerHTML = `
+
+            <!-- Details Header -->
+
+            <div class="details-header">
+
+                <img
+                    src="${coin.image.large}"
+                    alt="${coin.name}"
+                >
+
+                <div>
+
+                    <h2>
+                        ${coin.name}
+                    </h2>
+
+                    <p>
+                        ${coin.symbol}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Current Price -->
+
+            <div class="details-price">
+
+                <p>
+                    Current Price
+                </p>
+
+                <h3>
+                    $${price.toLocaleString()}
+                </h3>
+
+                <p
+                    style="
+                        color: ${changeColor};
+                        font-weight: bold;
+                        margin-top: 8px;
+                    "
+                >
+                    24H Change:
+                    ${change?.toFixed(2)}%
+                </p>
+
+            </div>
+
+
+            <!-- Details Grid -->
+
+            <div class="details-grid">
+
+
+                <div class="detail-box">
+
+                    <p>
+                        Market Rank
+                    </p>
+
+                    <strong>
+                        #${coin.market_cap_rank}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <p>
+                        Market Cap
+                    </p>
+
+                    <strong>
+                        $${marketData.market_cap.usd.toLocaleString()}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <p>
+                        24H High
+                    </p>
+
+                    <strong>
+                        $${marketData.high_24h.usd.toLocaleString()}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <p>
+                        24H Low
+                    </p>
+
+                    <strong>
+                        $${marketData.low_24h.usd.toLocaleString()}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <p>
+                        Total Volume
+                    </p>
+
+                    <strong>
+                        $${marketData.total_volume.usd.toLocaleString()}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <p>
+                        Circulating Supply
+                    </p>
+
+                    <strong>
+                        ${marketData.circulating_supply
+                            ? marketData.circulating_supply.toLocaleString()
+                            : "N/A"}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- Watchlist Button -->
+
+            <button
+                class="details-watchlist-btn"
+                id="detailsWatchlistBtn"
+                onclick="toggleDetailsWatchlist('${coin.id}')"
+            >
+                ${isCoinInWatchlist(coin.id)
+                    ? "★ Added to Watchlist"
+                    : "☆ Add to Watchlist"}
+            </button>
+
+        `;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Coin details error:",
+            error
+        );
+
+
+        content.innerHTML = `
+
+            <div class="details-loading">
+
+                <h3>
+                    Unable to load coin details
+                </h3>
+
+                <p>
+                    Please try again later.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   Check Watchlist
+========================= */
+
+function isCoinInWatchlist(coinId) {
+
+    const watchlist =
+        JSON.parse(
+            localStorage.getItem(
+                "watchlist"
+            )
+        ) || [];
+
+
+    return watchlist.includes(
+        coinId
+    );
+
+}
+
+
+/* =========================
+   Toggle Details Watchlist
+========================= */
+
+function toggleDetailsWatchlist(coinId) {
+
+    let watchlist =
+        JSON.parse(
+            localStorage.getItem(
+                "watchlist"
+            )
+        ) || [];
+
+
+    const button =
+        document.getElementById(
+            "detailsWatchlistBtn"
+        );
+
+
+    if (
+        watchlist.includes(
+            coinId
+        )
+    ) {
+
+        /* Remove */
+
+        watchlist =
+            watchlist.filter(
+                id =>
+                    id !== coinId
+            );
+
+
+        if (button) {
+
+            button.textContent =
+                "☆ Add to Watchlist";
+
+        }
+
+    }
+
+    else {
+
+        /* Add */
+
+        watchlist.push(
+            coinId
+        );
+
+
+        if (button) {
+
+            button.textContent =
+                "★ Added to Watchlist";
+
+        }
+
+    }
+
+
+    /* Save */
+
+    localStorage.setItem(
+        "watchlist",
+        JSON.stringify(
+            watchlist
+        )
+    );
+
+
+    /* Refresh market cards */
+
+    getCryptoData();
+
+}
+
+
+/* =========================
+   CLOSE DETAILS MODAL
+========================= */
+
+const closeCoinDetails =
+    document.getElementById(
+        "closeCoinDetails"
+    );
+
+
+closeCoinDetails.addEventListener(
+    "click",
+    function () {
+
+        const modal =
+            document.getElementById(
+                "coinDetailsModal"
+            );
+
+
+        modal.classList.add(
+            "hidden"
+        );
+
+    }
+);
+
+
+/* =========================
+   Close Modal on Background
+========================= */
+
+const coinDetailsModal =
+    document.getElementById(
+        "coinDetailsModal"
+    );
+
+
+coinDetailsModal.addEventListener(
+    "click",
+    function (event) {
+
+        if (
+            event.target ===
+            coinDetailsModal
+        ) {
+
+            coinDetailsModal.classList.add(
+                "hidden"
+            );
+
+        }
+
+    }
+);
 
 
 /* =========================
