@@ -1,91 +1,687 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f3f4f6;
-  margin: 0;
-  padding: 0;
+/* =========================
+   Global
+========================= */
+
+* {
+    box-sizing: border-box;
 }
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, sans-serif;
+
+    background-color: #f3f4f6;
+
+    color: #111827;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+/* =========================
+   Header
+========================= */
 
 header {
-  background-color: #111827;
-  color: white;
-  padding: 20px;
-  text-align: center;
+    height: 80px;
+
+    background-color: #ffffff;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 30px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 28px;
+
+/* Logo */
+
+.logo h1 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 26px;
 }
+
+
+/* =========================
+   Header Right
+========================= */
+
+.header-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+/* =========================
+   Search
+========================= */
+
+.search-box input {
+    width: 280px;
+
+    padding: 12px 15px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    background-color: #ffffff;
+
+    color: #111827;
+}
+
+.search-box input:focus {
+    border-color: #2563eb;
+}
+
+
+/* =========================
+   Theme Buttons
+========================= */
+
+.theme-buttons {
+    display: flex;
+
+    gap: 8px;
+}
+
+.theme-buttons button {
+    border: 1px solid #d1d5db;
+
+    background-color: #f9fafb;
+
+    color: #111827;
+
+    padding: 10px 13px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    transition: 0.3s;
+}
+
+.theme-buttons button:hover {
+    background-color: #111827;
+
+    color: white;
+}
+
+
+/* =========================
+   Main Layout
+========================= */
 
 main {
-  padding: 30px;
+    display: flex;
+
+    min-height: calc(100vh - 80px);
 }
 
-.overview {
-  background-color: white;
-  padding: 25px;
-  border-radius: 12px;
-  max-width: 1200px;
-  margin: 0 auto;
+
+/* =========================
+   Sidebar
+========================= */
+
+.sidebar {
+    width: 220px;
+
+    min-height: calc(100vh - 80px);
+
+    background-color: #111827;
+
+    color: white;
+
+    padding: 30px 18px;
+
+    border-right: 1px solid #374151;
 }
 
-.overview h2 {
-  margin-top: 0;
-  color: #111827;
-  margin-bottom: 25px;
+
+/* Sidebar Heading */
+
+.sidebar h2 {
+    margin-top: 0;
+
+    margin-bottom: 25px;
+
+    color: white;
+
+    font-size: 21px;
 }
+
+
+/* Sidebar Navigation */
+
+.sidebar nav {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.sidebar nav a {
+    color: #d1d5db;
+
+    text-decoration: none;
+
+    padding: 12px 14px;
+
+    border-radius: 8px;
+
+    transition: 0.3s;
+}
+
+.sidebar nav a:hover {
+    background-color: #374151;
+
+    color: white;
+}
+
+
+/* Active menu */
+
+.sidebar nav a.active {
+    background-color: #2563eb;
+
+    color: white;
+}
+
+
+/* =========================
+   Content
+========================= */
+
+.content {
+    flex: 1;
+
+    padding: 30px;
+
+    background-color: #f3f4f6;
+
+    transition: background-color 0.3s ease;
+}
+
+
+/* =========================
+   Page Sections
+========================= */
+
+.page-section {
+    display: none;
+}
+
+.page-section.active-section {
+    display: block;
+}
+
+
+/* =========================
+   Section Header
+========================= */
+
+.section-header {
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    border: 1px solid #e5e7eb;
+
+    margin-bottom: 25px;
+}
+
+.section-header h2 {
+    margin: 0 0 8px;
+
+    color: #111827;
+
+    font-size: 26px;
+}
+
+.section-header p {
+    margin: 0;
+
+    color: #6b7280;
+}
+
+
+/* =========================
+   Overview Card
+========================= */
+
+.overview-card {
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    border: 1px solid #e5e7eb;
+}
+
+.overview-card h3 {
+    margin-top: 0;
+
+    color: #111827;
+}
+
+.overview-card p {
+    color: #6b7280;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   Coin Container
+========================= */
 
 .coin-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
 }
+
+
+/* =========================
+   Coin Card
+========================= */
 
 .coin-card {
-  background-color: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-}
+    background-color: white;
 
-.coin-card img {
-  width: 60px;
-  height: 60px;
-}
+    border: 1px solid #e5e7eb;
 
-.coin-card h3 {
-  margin: 10px 0;
-  color: #111827;
-  font-size: 20px;
-}
+    border-radius: 12px;
 
-.coin-card p {
-  margin: 8px 0;
-  color: #4b5563;
-  font-size: 14px;
-}
-/* Hover Effect */
-.coin-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 20px;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .coin-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Card spacing */
-.coin-card {
-  padding: 20px;
-  margin-bottom: 20px;
-}
-.positive {
-  color: green;
-  font-weight: bold;
+
+/* Coin Image */
+
+.coin-card img {
+    width: 60px;
+
+    height: 60px;
 }
 
-.negative {
-  color: red;
-  font-weight: bold;
+
+/* Coin Name */
+
+.coin-card h3 {
+    margin: 10px 0;
+
+    color: #111827;
+
+    font-size: 20px;
+}
+
+
+/* Coin Details */
+
+.coin-card p {
+    margin: 8px 0;
+
+    color: #4b5563;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   Watchlist
+========================= */
+
+.watchlist-container {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+/* Watchlist Card */
+
+.watchlist-coin {
+    background-color: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+
+    transition: 0.3s;
+}
+
+.watchlist-coin:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+
+/* Watchlist Image */
+
+.watchlist-coin img {
+    width: 50px;
+
+    height: 50px;
+}
+
+
+/* Watchlist Name */
+
+.watchlist-coin strong {
+    color: #111827;
+
+    font-size: 17px;
+}
+
+
+/* Watchlist Price */
+
+.watchlist-coin p {
+    margin: 6px 0 0;
+
+    color: #4b5563;
+
+    font-size: 14px;
+}
+
+
+/* Empty Watchlist */
+
+.empty-watchlist {
+    grid-column: 1 / -1;
+
+    background-color: white;
+
+    border: 1px dashed #d1d5db;
+
+    border-radius: 12px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    color: #6b7280;
+}
+
+
+/* =========================
+   Watchlist Button
+========================= */
+
+.watchlist-btn {
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 10px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #111827;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    transition: 0.3s;
+}
+
+.watchlist-btn:hover {
+    background-color: #f59e0b;
+}
+
+
+/* =========================
+   Assets
+========================= */
+
+.assets-card {
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    border: 1px solid #e5e7eb;
+}
+
+.assets-card h3 {
+    margin-top: 0;
+
+    color: #111827;
+}
+
+.assets-card p {
+    color: #6b7280;
+}
+
+
+/* =========================
+   DARK THEME
+========================= */
+
+body.dark-theme {
+    background-color: #0f172a;
+
+    color: #f8fafc;
+}
+
+
+/* Header Dark */
+
+body.dark-theme header {
+    background-color: #1e293b;
+
+    border-color: #334155;
+}
+
+body.dark-theme .logo h1 {
+    color: #ffffff;
+}
+
+
+/* Search Dark */
+
+body.dark-theme .search-box input {
+    background-color: #0f172a;
+
+    border-color: #475569;
+
+    color: #ffffff;
+}
+
+body.dark-theme .search-box input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* Theme Buttons Dark */
+
+body.dark-theme .theme-buttons button {
+    background-color: #334155;
+
+    border-color: #475569;
+
+    color: #ffffff;
+}
+
+body.dark-theme .theme-buttons button:hover {
+    background-color: #ffffff;
+
+    color: #111827;
+}
+
+
+/* Sidebar Dark */
+
+body.dark-theme .sidebar {
+    background-color: #020617;
+
+    border-color: #1e293b;
+}
+
+
+/* Content Dark */
+
+body.dark-theme .content {
+    background-color: #0f172a;
+}
+
+
+/* Section Header Dark */
+
+body.dark-theme .section-header {
+    background-color: #1e293b;
+
+    border-color: #334155;
+}
+
+body.dark-theme .section-header h2 {
+    color: #ffffff;
+}
+
+body.dark-theme .section-header p {
+    color: #94a3b8;
+}
+
+
+/* Overview Dark */
+
+body.dark-theme .overview-card {
+    background-color: #1e293b;
+
+    border-color: #334155;
+}
+
+body.dark-theme .overview-card h3 {
+    color: #ffffff;
+}
+
+body.dark-theme .overview-card p {
+    color: #94a3b8;
+}
+
+
+/* Coin Cards Dark */
+
+body.dark-theme .coin-card {
+    background-color: #1e293b;
+
+    border-color: #334155;
+}
+
+body.dark-theme .coin-card h3 {
+    color: #ffffff;
+}
+
+body.dark-theme .coin-card p {
+    color: #cbd5e1;
+}
+
+
+/* Watchlist Dark */
+
+body.dark-theme .watchlist-coin {
+    background-color: #1e293b;
+
+    border-color: #334155;
+}
+
+body.dark-theme .watchlist-coin strong {
+    color: #ffffff;
+}
+
+body.dark-theme .watchlist-coin p {
+    color: #cbd5e1;
+}
+
+
+/* Empty Watchlist Dark */
+
+body.dark-theme .empty-watchlist {
+    background-color: #1e293b;
+
+    border-color: #475569;
+
+    color: #94a3b8;
+}
+
+
+/* Assets Dark */
+
+body.dark-theme .assets-card {
+    background-color: #1e293b;
+
+    border-color: #334155;
+}
+
+body.dark-theme .assets-card h3 {
+    color: #ffffff;
+}
+
+body.dark-theme .assets-card p {
+    color: #94a3b8;
 }

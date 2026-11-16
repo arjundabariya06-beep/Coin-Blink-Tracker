@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,20 +12,247 @@
 
 <body>
 
+    <!-- =========================
+         Header
+    ========================= -->
+
     <header>
-        <h1>Coin Blink Tracker</h1>
+
+        <div class="logo">
+            <h1>Coin Blink Tracker</h1>
+        </div>
+
+
+        <div class="header-right">
+
+            <!-- Search -->
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search cryptocurrency..."
+                >
+
+            </div>
+
+
+            <!-- Theme Buttons -->
+            <div class="theme-buttons">
+
+                <button id="lightThemeBtn">
+                    ☀ Light
+                </button>
+
+                <button id="darkThemeBtn">
+                    🌙 Dark
+                </button>
+
+            </div>
+
+        </div>
+
     </header>
+
+
+    <!-- =========================
+         Main Layout
+    ========================= -->
 
     <main>
 
-        <section class="overview">
-            <h2>Market Overview</h2>
 
-            <p>Live prices will appear here.</p>
+        <!-- Sidebar -->
+
+        <aside class="sidebar">
+
+            <h2>Menu</h2>
+
+
+            <nav>
+
+                <a href="#" data-section="overview">
+                    Overview
+                </a>
+
+                <a href="#" data-section="markets">
+                    Markets
+                </a>
+
+                <a href="#" data-section="watchlist">
+                    Watchlist
+                </a>
+
+                <a href="#" data-section="assets">
+                    All Assets
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+
+        <!-- =========================
+             Content
+        ========================= -->
+
+        <section class="content">
+
+
+            <!-- Overview -->
+
+            <section
+                id="overview"
+                class="page-section active-section"
+            >
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>Market Overview</h2>
+
+                        <p>
+                            Track the latest cryptocurrency market data.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="overview-card">
+
+                    <h3>
+                        Welcome to Coin Blink Tracker
+                    </h3>
+
+                    <p>
+                        Search cryptocurrencies, check live prices
+                        and save your favourite coins to your watchlist.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- Markets -->
+
+            <section
+                id="markets"
+                class="page-section"
+            >
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>Markets</h2>
+
+                        <p>
+                            Live cryptocurrency market prices
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Crypto cards -->
+
+                <div
+                    id="coinContainer"
+                    class="coin-container"
+                >
+
+                </div>
+
+            </section>
+
+
+
+            <!-- Watchlist -->
+
+            <section
+                id="watchlist"
+                class="page-section"
+            >
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>My Watchlist</h2>
+
+                        <p>
+                            Your saved cryptocurrencies
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="watchlistContainer"
+                    class="watchlist-container"
+                >
+
+                </div>
+
+            </section>
+
+
+
+            <!-- All Assets -->
+
+            <section
+                id="assets"
+                class="page-section"
+            >
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>All Assets</h2>
+
+                        <p>
+                            All available cryptocurrency assets
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="assets-card">
+
+                    <h3>
+                        Top 20 Cryptocurrency Assets
+                    </h3>
+
+                    <p>
+                        Browse the cryptocurrency market
+                        from the Markets section.
+                    </p>
+
+                </div>
+
+            </section>
+
         </section>
 
     </main>
+
+
+    <!-- JavaScript -->
+
     <script src="script.js"></script>
 
 </body>
+
 </html>
