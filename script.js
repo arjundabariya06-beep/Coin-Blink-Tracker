@@ -18,7 +18,10 @@ async function getCryptoData() {
             <img src="${coin.image}" alt="${coin.name}">
             <h3>${coin.name}</h3>
             <p>Price: $${coin.current_price}</p>
-            <p>24h Change: ${coin.price_change_percentage_24h?.toFixed(2)}%</p>
+            
+<p style="color: ${coin.price_change_percentage_24h >= 0 ? 'green' : 'red'}; font-weight: bold;">
+  24h Change: ${coin.price_change_percentage_24h?.toFixed(2)}%
+</p>
             <p>Market Cap: $${coin.market_cap.toLocaleString()}</p>
           </div>
         `).join("")}
