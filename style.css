@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #111827;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+main {
+    padding: 30px;
+}
+
+.overview {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.overview h2 {
+    margin-top: 0;
+    color: #111827;
+}
+
+.overview p {
+    color: #666;
+}
