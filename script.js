@@ -1,21 +1,17 @@
-/* =========================
-   API
-========================= */
 
-const API_URL =
-    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false";
+//API //
 
 
-/* =========================
-   Get Crypto Data
-========================= */
+const API_URL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false";
+
+
+//Get Crypto Data
+
 
 async function getCryptoData() {
-
+      
     try {
-
         const response = await fetch(API_URL);
-
         if (!response.ok) {
             throw new Error("API request failed");
         }
@@ -30,8 +26,7 @@ async function getCryptoData() {
 
     catch (error) {
 
-        console.error(
-            "Error fetching crypto data:",
+        console.error( "Error fetching crypto data:",
             error
         );
 
@@ -40,33 +35,28 @@ async function getCryptoData() {
 }
 
 
-/* =========================
-   Render Coins
-========================= */
+
+//    Render Coins
+
 
 function renderCoins(coins) {
 
-    const coinContainer =
-        document.getElementById("coinContainer");
-
+    const coinContainer = document.getElementById("coinContainer");
     coinContainer.innerHTML = coins.map(coin => {
 
-        const change =
-            coin.price_change_percentage_24h;
+        const change =  coin.price_change_percentage_24h;
 
         const changeColor =
             change >= 0
                 ? "green"
                 : "red";
-
-        return `
+         return `
 
             <div class="coin-card">
 
                 <img
                     src="${coin.image}"
-                    alt="${coin.name}"
-                >
+                    alt="${coin.name}">
 
                 <h3>
                     ${coin.name}
@@ -80,9 +70,8 @@ function renderCoins(coins) {
                 <p
                     style="
                         color: ${changeColor};
-                        font-weight: bold;
-                    "
-                >
+                        font-weight: bold;" >
+
                     24h Change:
                     ${change?.toFixed(2)}%
                 </p>
@@ -124,9 +113,9 @@ function renderCoins(coins) {
 }
 
 
-/* =========================
-   Watchlist Buttons
-========================= */
+
+//    Watchlist Buttons
+
 
 function setupWatchlistButtons(coins) {
 
@@ -143,24 +132,22 @@ function setupWatchlistButtons(coins) {
 
 
     buttons.forEach(button => {
-
-        const coinId =
-            button.dataset.id;
+         const coinId = button.dataset.id;
 
 
-        /* Already Added */
+         //  Already Added 
 
-        if (
+         if (
             watchlist.includes(coinId)
-        ) {
+         ) {
 
             button.textContent =
                 "★ Added to Watchlist";
 
-        }
+         }
 
 
-        /* Click */
+        //  Click 
 
         button.addEventListener(
             "click",
@@ -174,12 +161,10 @@ function setupWatchlistButtons(coins) {
                     ) || [];
 
 
-                /* Remove */
+                //  Remove 
 
                 if (
-                    currentWatchlist.includes(
-                        coinId
-                    )
+                    currentWatchlist.includes(  coinId )
                 ) {
 
                     currentWatchlist =
@@ -194,7 +179,7 @@ function setupWatchlistButtons(coins) {
                 }
 
 
-                /* Add */
+                // Add 
 
                 else {
 
@@ -208,7 +193,7 @@ function setupWatchlistButtons(coins) {
                 }
 
 
-                /* Save */
+                // Save 
 
                 localStorage.setItem(
                     "watchlist",
@@ -218,7 +203,7 @@ function setupWatchlistButtons(coins) {
                 );
 
 
-                /* Update Watchlist */
+                //  Update Watchlist 
 
                 showWatchlist(coins);
 
@@ -230,14 +215,13 @@ function setupWatchlistButtons(coins) {
 }
 
 
-/* =========================
-   Show Watchlist
-========================= */
+
+//    Show Watchlist
+
 
 function showWatchlist(coins) {
 
-    const container =
-        document.getElementById(
+    const container = document.getElementById(
             "watchlistContainer"
         );
 
@@ -250,7 +234,7 @@ function showWatchlist(coins) {
         ) || [];
 
 
-    /* Empty */
+    //  Empty 
 
     if (
         watchlist.length === 0
@@ -277,7 +261,7 @@ function showWatchlist(coins) {
     }
 
 
-    /* Saved Coins */
+    //  Saved Coins 
 
     const savedCoins =
         coins.filter(
@@ -317,12 +301,11 @@ function showWatchlist(coins) {
 }
 
 
-/* =========================
-   Search
-========================= */
 
-const searchInput =
-    document.getElementById(
+//    Search
+
+
+const searchInput = document.getElementById(
         "searchInput"
     );
 
@@ -374,18 +357,16 @@ searchInput.addEventListener(
 );
 
 
-/* =========================
-   Sidebar Navigation
-========================= */
 
-const menuLinks =
-    document.querySelectorAll(
+//    Sidebar Navigation
+
+
+const menuLinks = document.querySelectorAll(
         ".sidebar nav a"
     );
 
 
-const sections =
-    document.querySelectorAll(
+const sections = document.querySelectorAll(
         ".page-section"
     );
 
@@ -403,7 +384,7 @@ menuLinks.forEach(link => {
                 this.dataset.section;
 
 
-            /* Hide all sections */
+            //  Hide all sections 
 
             sections.forEach(section => {
 
@@ -414,7 +395,7 @@ menuLinks.forEach(link => {
             });
 
 
-            /* Show selected section */
+            //  Show selected section
 
             const selectedSection =
                 document.getElementById(
@@ -431,7 +412,7 @@ menuLinks.forEach(link => {
             }
 
 
-            /* Active Menu */
+            //  Active Menu 
 
             menuLinks.forEach(item => {
 
@@ -452,9 +433,9 @@ menuLinks.forEach(link => {
 });
 
 
-/* =========================
-   Theme
-========================= */
+
+//    Theme
+
 
 const lightThemeBtn =
     document.getElementById(
@@ -468,7 +449,7 @@ const darkThemeBtn =
     );
 
 
-/* Light Theme */
+//  Light Theme 
 
 lightThemeBtn.addEventListener(
     "click",
@@ -488,7 +469,7 @@ lightThemeBtn.addEventListener(
 );
 
 
-/* Dark Theme */
+//  Dark Theme 
 
 darkThemeBtn.addEventListener(
     "click",
@@ -508,9 +489,9 @@ darkThemeBtn.addEventListener(
 );
 
 
-/* =========================
-   Load Saved Theme
-========================= */
+
+//    Load Saved Theme
+
 
 const savedTheme =
     localStorage.getItem(
@@ -529,12 +510,11 @@ if (
 }
 
 
-/* =========================
-   Default Menu
-========================= */
 
-const overviewMenu =
-    document.querySelector(
+//    Default Menu
+
+
+const overviewMenu = document.querySelector(
         '[data-section="overview"]'
     );
 
@@ -548,9 +528,9 @@ if (overviewMenu) {
 }
 
 
-/* =========================
-   COIN DETAILS
-========================= */
+
+//    COIN DETAILS
+
 
 async function showCoinDetails(coinId) {
 
@@ -566,14 +546,14 @@ async function showCoinDetails(coinId) {
         );
 
 
-    /* Open Modal */
+    //  Open Modal 
 
     modal.classList.remove(
         "hidden"
     );
 
 
-    /* Loading */
+    //  Loading 
 
     content.innerHTML = `
 
@@ -604,22 +584,16 @@ async function showCoinDetails(coinId) {
 
         }
 
-
-        const coin =
-            await response.json();
+         const coin =  await response.json();
 
 
-        const marketData =
-            coin.market_data;
+        const marketData = coin.market_data;
 
 
-        const price =
-            marketData.current_price.usd;
+        const price = marketData.current_price.usd;
 
 
-        const change =
-            marketData
-                .price_change_percentage_24h;
+        const change = marketData.price_change_percentage_24h;
 
 
         const changeColor =
@@ -785,17 +759,14 @@ async function showCoinDetails(coinId) {
     }
 
 
-    catch (error) {
-
-        console.error(
+    catch (error) { console.error(
             "Coin details error:",
             error
         );
 
 
         content.innerHTML = `
-
-            <div class="details-loading">
+                    <div class="details-loading">
 
                 <h3>
                     Unable to load coin details
@@ -814,36 +785,31 @@ async function showCoinDetails(coinId) {
 }
 
 
-/* =========================
-   Check Watchlist
-========================= */
+//    Check Watchlist
+
 
 function isCoinInWatchlist(coinId) {
-
-    const watchlist =
+     const watchlist =
         JSON.parse(
             localStorage.getItem(
                 "watchlist"
             )
         ) || [];
-
-
-    return watchlist.includes(
+     return watchlist.includes(
         coinId
     );
 
 }
 
 
-/* =========================
-   Toggle Details Watchlist
-========================= */
+
+//    Toggle Details Watchlist
+
 
 function toggleDetailsWatchlist(coinId) {
 
     let watchlist =
-        JSON.parse(
-            localStorage.getItem(
+        JSON.parse( localStorage.getItem(
                 "watchlist"
             )
         ) || [];
@@ -855,24 +821,21 @@ function toggleDetailsWatchlist(coinId) {
         );
 
 
-    if (
-        watchlist.includes(
+    if (  watchlist.includes(
             coinId
         )
     ) {
 
-        /* Remove */
+        //  Remove 
 
-        watchlist =
-            watchlist.filter(
+        watchlist =  watchlist.filter(
                 id =>
                     id !== coinId
             );
 
 
         if (button) {
-
-            button.textContent =
+         button.textContent =
                 "☆ Add to Watchlist";
 
         }
@@ -882,7 +845,7 @@ function toggleDetailsWatchlist(coinId) {
 
     else {
 
-        /* Add */
+        //  Add 
 
         watchlist.push(
             coinId
@@ -899,7 +862,7 @@ function toggleDetailsWatchlist(coinId) {
     }
 
 
-    /* Save */
+    //  Save 
 
     localStorage.setItem(
         "watchlist",
@@ -909,16 +872,16 @@ function toggleDetailsWatchlist(coinId) {
     );
 
 
-    /* Refresh market cards */
+    //  Refresh market cards 
 
     getCryptoData();
 
 }
 
 
-/* =========================
-   CLOSE DETAILS MODAL
-========================= */
+
+//    CLOSE DETAILS MODAL
+
 
 const closeCoinDetails =
     document.getElementById(
@@ -944,9 +907,9 @@ closeCoinDetails.addEventListener(
 );
 
 
-/* =========================
-   Close Modal on Background
-========================= */
+
+//    Close Modal on Background
+
 
 const coinDetailsModal =
     document.getElementById(
@@ -973,16 +936,15 @@ coinDetailsModal.addEventListener(
 );
 
 
-/* =========================
-   Start App
-========================= */
+
+//    Start App
+
 
 getCryptoData();
 
 
-/* =========================
-   Refresh Data
-========================= */
+//    Refresh Data
+
 
 const refreshDataBtn =
     document.getElementById(
@@ -1032,3 +994,159 @@ refreshDataBtn.addEventListener(
 
     }
 );
+
+
+//    Dashboard Statistics
+
+
+function updateDashboardStats(coins) {
+
+    //  Total Coins 
+
+    const totalCoins =
+        document.getElementById("totalCoins");
+
+    if (totalCoins) {
+        totalCoins.textContent = coins.length;
+    }
+
+
+    //  Total Market Cap 
+
+    const totalMarketCap =
+        coins.reduce(
+            (total, coin) =>
+                total + (coin.market_cap || 0),
+            0
+        );
+
+    const marketCapElement =
+        document.getElementById("totalMarketCap");
+
+    if (marketCapElement) {
+
+        marketCapElement.textContent =
+            "$" + totalMarketCap.toLocaleString(
+                undefined,
+                {
+                    maximumFractionDigits: 0
+                }
+            );
+
+    }
+
+
+    //  Top Gainer 
+
+    const topGainer =
+        coins.reduce(
+            (highest, coin) => {
+
+                const change =
+                    coin.price_change_percentage_24h || 0;
+
+                const highestChange =
+                    highest.price_change_percentage_24h || 0;
+
+                return change > highestChange
+                    ? coin
+                    : highest;
+
+            },
+            coins[0]
+        );
+
+    const topGainerElement =
+        document.getElementById("topGainer");
+
+    if (topGainerElement && topGainer) {
+
+        topGainerElement.textContent =
+            `${topGainer.name} +${topGainer.price_change_percentage_24h?.toFixed(2)}%`;
+
+    }
+
+
+    //  Top Loser 
+
+    const topLoser =
+        coins.reduce(
+            (lowest, coin) => {
+
+                const change =
+                    coin.price_change_percentage_24h || 0;
+
+                const lowestChange =
+                    lowest.price_change_percentage_24h || 0;
+
+                return change < lowestChange
+                    ? coin
+                    : lowest;
+
+            },
+            coins[0]
+        );
+
+    const topLoserElement =
+        document.getElementById("topLoser");
+
+    if (topLoserElement && topLoser) {
+
+        topLoserElement.textContent =
+            `${topLoser.name} ${topLoser.price_change_percentage_24h?.toFixed(2)}%`;
+
+    }
+
+
+    //  Highest Price 
+
+    const highestPriceCoin =
+        coins.reduce(
+            (highest, coin) => {
+
+                return coin.current_price >
+                    highest.current_price
+                    ? coin
+                    : highest;
+
+            },
+            coins[0]
+        );
+
+    const highestPriceElement =
+        document.getElementById("highestPrice");
+
+    if (
+        highestPriceElement &&
+        highestPriceCoin
+    ) {
+
+        highestPriceElement.textContent =
+            "$" +
+            highestPriceCoin.current_price.toLocaleString();
+
+    }
+
+
+    //  Last Updated 
+
+    const lastUpdated =
+        document.getElementById("lastUpdated");
+
+    if (lastUpdated) {
+
+        const now =
+            new Date();
+
+        lastUpdated.textContent =
+            now.toLocaleTimeString(
+                [],
+                {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            );
+
+    }
+
+}

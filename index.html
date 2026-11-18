@@ -8,13 +8,12 @@
     <title>Coin Blink Tracker</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
 </head>
 
 <body>
 
-    <!-- =========================
-         Header
-    ========================= -->
+         <!-- Header -->
 
     <header>
 
@@ -40,16 +39,18 @@
             <!-- Theme Buttons -->
 
             <div class="theme-buttons">
+
                 <button id="refreshDataBtn" class="refresh-btn">
-    ↻ Refresh Data
-</button>
+                    <i class="fa-solid fa-arrow-rotate-left"></i> Refresh Data
+                </button>
 
                 <button id="lightThemeBtn">
-                    ☀ Light
+                    <i class="fa-regular fa-sun"></i> Light
                 </button>
 
                 <button id="darkThemeBtn">
-                    🌙 Dark
+                    <i class="fa-solid fa-moon"></i>
+ Dark
                 </button>
 
             </div>
@@ -59,16 +60,16 @@
     </header>
 
 
-    <!-- =========================
-         Main Layout
-    ========================= -->
+
+         <!-- Main Layout -->
+
 
     <main>
 
 
-        <!-- =========================
-             Sidebar
-        ========================= -->
+   
+             <!-- Sidebar -->
+     
 
         <aside class="sidebar">
 
@@ -97,16 +98,16 @@
         </aside>
 
 
-        <!-- =========================
-             Main Content
-        ========================= -->
+       
+             <!-- Main Content -->
+    
 
         <section class="content">
 
 
-            <!-- =========================
-                 Overview
-            ========================= -->
+        
+                 <!-- Overview -->
+        
 
             <section
                 id="overview"
@@ -130,6 +131,160 @@
                 </div>
 
 
+             
+                     <!-- Market Statistics -->
+               
+
+                <div class="stats-container">
+
+
+                    <!-- Total Coins -->
+
+                    <div class="stat-card">
+
+                        <div class="    ">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+
+                        <div class="stat-info">
+
+                            <p>
+                                Total Coins
+                            </p>
+
+                            <h3 id="totalCoins">
+                                0
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Market Cap -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-sack-dollar"></i>
+                        </div>
+
+                        <div class="stat-info">
+
+                            <p>
+                                Market Cap
+                            </p>
+
+                            <h3 id="totalMarketCap">
+                                <i class="fa-solid fa-dollar-sign"></i>0
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Top Gainer -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+
+                        </div>
+
+                        <div class="stat-info">
+
+                            <p>
+                                Top Gainer
+                            </p>
+
+                            <h3 id="topGainer">
+                                --
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Top Loser -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-arrow-trend-down"></i>
+                        </div>
+
+                        <div class="stat-info">
+
+                            <p>
+                                Top Loser
+                            </p>
+
+                            <h3 id="topLoser">
+                                --
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Highest Price -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-money-bill-1-wave"></i>
+
+                        </div>
+
+                        <div class="stat-info">
+
+                            <p>
+                                Highest Price
+                            </p>
+
+                            <h3 id="highestPrice">
+                                $0
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Last Updated -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                        </div>
+
+                        <div class="stat-info">
+
+                            <p>
+                                Last Updated
+                            </p>
+
+                            <h3 id="lastUpdated">
+                                --
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+       
+                     <!-- Welcome Card -->
+              
+
                 <div class="overview-card">
 
                     <h3>
@@ -148,9 +303,8 @@
 
 
 
-            <!-- =========================
-                 Markets
-            ========================= -->
+                 <!-- Markets -->
+       
 
             <section
                 id="markets"
@@ -171,7 +325,6 @@
 
                     </div>
 
-
                 </div>
 
 
@@ -188,9 +341,9 @@
 
 
 
-            <!-- =========================
-                 Watchlist
-            ========================= -->
+      
+                 <!-- Watchlist -->
+         
 
             <section
                 id="watchlist"
@@ -225,9 +378,9 @@
 
 
 
-            <!-- =========================
-                 All Assets
-            ========================= -->
+     
+                 <!-- All Assets -->
+        
 
             <section
                 id="assets"
@@ -272,9 +425,9 @@
 
 
 
-    <!-- =========================
-         Coin Details Modal
-    ========================= -->
+<!--   
+         Coin Details Modal -->
+ 
 
     <div
         id="coinDetailsModal"
@@ -290,7 +443,7 @@
                 id="closeCoinDetails"
                 class="close-modal"
             >
-                ×
+                <i class="fa-solid fa-xmark"></i>
             </button>
 
 
@@ -316,9 +469,9 @@
 
 
 
-    <!-- =========================
-         JavaScript
-    ========================= -->
+  
+         <!-- JavaScript -->
+
 
     <script src="script.js"></script>
 
